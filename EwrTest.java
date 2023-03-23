@@ -213,4 +213,37 @@ public class EwrTest {
 
 		assertEquals("formatSchedule did not format correctly.", expectedSchedule, actualSchedule); 
 	}
+	
+	@Test
+    	public void testFeedingInheritedGetters(){
+        int actualAnimalId = testAnimal.getAnimalId();
+        int actualTaskId = testAnimal.getTaskId();
+        int actualDescription = testAnimal.getDescription();
+        int actualDuration = testAnimal.getDuration();
+        int actualMaxWindow = testAnimal.getMaxWindow();
+
+        assertEquals("Getter returned wrong value for AnimalId", expectedAnimalId, actualAnimalId);
+        assertEquals("Getter returned wrong value for TaskId", expectedTaskId, actualTaskId);
+        assertEquals("Getter returned wrong value for Description", expectedDescription, actualDescription);
+        assertEquals("Getter returned wrong value for Duration", expectedDuration, actualDuration);
+        assertEquals("Getter returned wrong value for MaxWindow", expectedMaxWindow, actualMaxWindow);
+    }
+
+    @Test
+    public void testFeedingHourGetter(){
+        int actualFeedingHour = testAnimal.getFeedingHour();
+        assertEquals("Getter returned wrong value for FeedingHour", expectedFeedingHour, actualFeedingHour);
+    }
+
+    @Test
+    public void testInvalidFeedingHour(){
+        boolean testResult = false;
+        int invalidFeedingHour = 26;
+
+        try {
+            var testFeeding = new Feeding(expectedAnimalId, expectedTaskId, expectedDescription, expectedDuration, expectedMaxWindow, invalidFeedingHour);
+        }
+        catch (IllegalArgumentException e) {
+            testResult = true;
+        }
 }
