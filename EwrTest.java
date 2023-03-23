@@ -12,7 +12,7 @@ public class EwrTest {
 	String expectedDescription = "Give vitamin injection";
 	int expectedDuration = 5;
 	int expectedMaxWindow = 5;
-	
+
 	public Animal testAnimal = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies );
 
 	@Test
@@ -82,9 +82,9 @@ public class EwrTest {
 		catch (Exception e) { }
 		assertTrue("Invalid Animal Id did not throw an IllegalArgumentException", testResult);
 	}
-	
-	    @Test
-	    public void testTreatmentInheritedGetters(){
+
+	@Test
+	public void testTreatmentInheritedGetters(){
 		int actualAnimalId = testAnimal.getAnimalId();
 		int actualTaskId = testAnimal.getTaskId();
 		int actualDescription = testAnimal.getDescription();
@@ -96,16 +96,16 @@ public class EwrTest {
 		assertEquals("Getter returned wrong value for Description", expectedDescription, actualDescription);
 		assertEquals("Getter returned wrong value for Duration", expectedDuration, actualDuration);
 		assertEquals("Getter returned wrong value for MaxWindow", expectedMaxWindow, actualMaxWindow);
-	    }
+	}
 
-	    @Test
-	    public void testTreatmentHourGetter(){
+	@Test
+	public void testTreatmentHourGetter(){
 		int actualTreatmentHour = testAnimal.getStartHour();
 		assertEquals("Getter returned wrong value for StartHour", expectedTreatmentHour, actualTreatmentHour);
-	    }
+	}
 
-	    @Test
-	    public void testInvalidStartHour(){
+	@Test
+	public void testInvalidStartHour(){
 		boolean testResult = false;
 		int invalidStartHour = 26;
 
@@ -117,5 +117,100 @@ public class EwrTest {
 		}
 		catch (Exception e) { }
 		assertTrue("Invalid start hour did not throw an IllegalArgumentException", testResult);
-	    }
+	}
+	
+	
+	// ExampleWildlifeRescue Class Tests
+
+	ArrayList<Animal> testAnimals = new ArrayList <Animal>();
+	ArrayList<Tasks> testTasks = new ArrayList <Tasks>();
+
+	public ExampleWildlifeRescue ewr = new ExampleWildlifeRescue(testAnimals, testTasks);
+
+	@Test
+	public void testAddAnimal() {
+		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
+		ewr.addAnimal(animal);
+		assertEquals("Animal not added to ArrayList properly", 1, ewr.getAnimals().size());
+	}
+
+	@Test
+	public void testAddingDuplicateAnimals() {
+		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
+		ewr.addAnimal(animal1);
+		Animal animal2 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
+		ewr.addAnimal(animal2);
+		assertEquals("Cannot add animals with the same ID.", 1, ewr.getAnimals().size());
+	}
+
+	@Test
+	public void testRemoveAnimal() {
+		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
+		Animal animal2 = new Animal(5, "Eraser", "coyote");
+		ewr.addAnimal(animal1);
+		ewr.addAnimal(animal2);
+		ewr.removeAnimal(animal1);
+		assertFalse("removeAnimal did not remove the animal properly", ewr.getAnimals().contains(animal1));
+	}
+
+	@Test
+	public void testAddTask() {
+		Task testTask = new Task(1, 'Kit feeding', 30, 2);
+		ewr.addTask(testTask);
+		assertEquals(1, ewr.getTasks().size());
+	}
+
+	@Test
+	public void testRemoveTask() {
+		Task testTask = new Task(1, 'Kit feeding', 30, 2);
+		ewr.addTask(testTask);
+		ewr.removeTask(testTask);
+		assertFalse(ewr.getTasks().contains(testTask));
+	}
+
+	@Test
+	public void testExampleWildlifeRescueConstructorAndGetters() {
+		ArrayList<Animal> expectedAnimals = testAnimals;
+		ArrayList<Tasks> expectedTasks = testTasks;
+
+		public ExampleWildlifeRescue ewr1 = new ExampleWildlifeRescue(testAnimals, testTasks);
+
+		ArrayList<Animal> actualAnimals = ewr1.getAnimals();
+		ArrayList<Tasks> actualTasks = ewr1.getTasks();
+
+		assertEquals("Constructor or getter gave wrong value for animals", expectedAnimals, actualAnimals);
+		assertEquals("Constructor or getter gave wrong value for tasks", expectedTasks, actualTasks);
+	}
+
+	@Test
+	public void testExampleWildlifeRescueIllegalArgumentException() {
+		boolean testResult = false;
+		try {
+		    public ExampleWildlifeRescue ewr = new ExampleWildlifeRescue(testTasks, testAnimals); // switched argument order
+		}
+		catch (IllegalArgumentException e) {
+		    testResult = true;
+		}
+		catch (Exception e) { }
+		assertTrue("ExampleWildlifeRescue constructor did not throw an IllegalArgumentException with invalid argument order.", 
+		    testResult);
+	}
+
+	@Test
+	public void testFormatSchedule() {
+		Animal animal1 = new Animal(6, 'Annie, Oliver and Mowgli', 'fox');
+		Animal animal2 = new Animal(8, 'Spike', 'porcupine');
+		Task task1 = new Task(1, 'Kit feeding', 30, 2, animal1);
+		Task task2 = new Task(2, 'Rebandage leg wound', 20, 1, animal2);
+		ewr.addAnimal(animal1);
+		ewr.addAnimal(animal2);
+		ewr.addTask(task1);
+		ewr.addTask(task2);
+
+		String expectedSchedule = "Schedule for 2023-02-27\n\n19:00\n* Rebandage leg wound (Slinky)\n* Kit feeding (Annie, Oliver and Mowgli)\n\n21:00\n* Kit feeding (Annie, Oliver and Mowgli)"
+
+		String actualSchedule = ewr.formatSchedule("2023-02-27");
+
+		assertEquals("formatSchedule did not format correctly.", expectedSchedule, actualSchedule); 
+	}
 }
