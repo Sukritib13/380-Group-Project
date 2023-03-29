@@ -8,5 +8,13 @@
 package edu.ucalgary.oop;
 
 interface Schedule {
-    
+    /**
+     * 
+     * @param month
+     * @param day
+     * @param year
+     */
+    public void formatSchedule(int month, int day, int year){
+
+    }
 }
