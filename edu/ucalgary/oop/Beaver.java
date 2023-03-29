@@ -7,6 +7,10 @@
 
 package edu.ucalgary.oop;
 
-public class Beaver {
-    
+public class Beaver extends Animal{
+    private String animalType;
+
+    public int getFeedingHour(){
+        
+    }
 }

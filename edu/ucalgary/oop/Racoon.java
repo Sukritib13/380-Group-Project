@@ -7,6 +7,10 @@
 
 package edu.ucalgary.oop;
 
-public class Racoon {
-    
+public class Racoon extends Animal{
+    private String animalType;
+
+    public int getFeedingHour(){
+
+    }
 }

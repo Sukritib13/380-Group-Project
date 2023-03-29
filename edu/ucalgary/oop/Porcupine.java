@@ -7,6 +7,11 @@
 
 package edu.ucalgary.oop;
 
-public class Porcupine {
+public class Porcupine extends Animal{
+    private String animalType;
+
+    public int getFeedingHour(){
+
+    }
     
 }
