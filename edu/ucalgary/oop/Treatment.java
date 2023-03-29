@@ -7,21 +7,21 @@
 
 package edu.ucalgary.oop;
 
-public class Feeding {
-    private int feedingHour;
+public class Treatment {
+    private int startHour;
 
     /** Constructor */
     /**
      * 
+     * @param animalId
      * @param taskId
      * @param description
      * @param duration
      * @param maxWindow
-     * @param animal
-     * @param feedingHour
+     * @param startHour
      * @throws IllegalArgumentException
      */
-    public Feeding(int taskId, String description, int duration, int maxWindow, Animal animal, int feedingHour) throws IllegalArgumentException{
+    public Treatment(int animalId, int taskId, String description, int duration, int maxWindow, int startHour) throws IllegalArgumentException{
 
     }
 
@@ -29,7 +29,7 @@ public class Feeding {
      * 
      * @return
      */
-    public int getFeedingHour(){
+    public int getStartHout(){
 
     }
     
