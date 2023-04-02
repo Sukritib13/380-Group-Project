@@ -7,6 +7,15 @@
 
 package edu.ucalgary.oop;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.util.*;
+import java.sql.*;
+import java.text.*;
+import java.io.*;
+import java.util.Date;
+
 public class GUI extends JFrame implements ActionListener {
     private ExampleWildlifeRescue rescue;
     private JButton generateButton;
