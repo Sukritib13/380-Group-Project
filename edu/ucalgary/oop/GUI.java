@@ -1,7 +1,7 @@
 /**
  * Class description
  * @author Sukriti Badhwar, Rita Boury, Rimal Rizvi, Huiying Zhen Zhen
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 
