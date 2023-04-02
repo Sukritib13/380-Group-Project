@@ -26,7 +26,11 @@ abstract class Task {
      * @throws IllegalArgumentException
      */
     public Task(int taskId, String description, int duration, int maxWindow, Animal animal) throws IllegalArgumentException{
-
+        this.TASKID = taskId;
+        this.description = description;
+        this.duration = duration;
+        this.maxWindow = maxWindow;
+        this.animal = animal;
     }
 
     /** Getters */
@@ -36,7 +40,7 @@ abstract class Task {
      * @return
      */
     public int getTaskId(){
-
+        return this.TASKID;
     }
 
     /**
@@ -44,7 +48,7 @@ abstract class Task {
      * @return
      */
     public String getDescription(){
-
+        return this.description;
     }
 
     /**
@@ -52,7 +56,7 @@ abstract class Task {
      * @return
      */
     public int getDuration(){
-
+        return this.duration;
     }
 
     /**
@@ -60,7 +64,7 @@ abstract class Task {
      * @return
      */
     public int getMaxWindow(){
-
+        return this.maxWindow; 
     }
 
     /** Setters */
@@ -69,7 +73,7 @@ abstract class Task {
      * @param description
      */
     public void setDescription(String description){
-
+        
     }
 
     /**
