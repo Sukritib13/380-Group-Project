@@ -66,29 +66,4 @@ abstract class Task {
     public int getMaxWindow(){
         return this.maxWindow; 
     }
-
-    /** Setters */
-    /**
-     * 
-     * @param description
-     */
-    public void setDescription(String description){
-        
-    }
-
-    /**
-     * 
-     * @param duration
-     */
-    public void setDuration(int duration){
-
-    }
-
-    /**
-     * 
-     * @param maxWindow
-     */
-    public void setMaxWindow(int maxWindow){
-
-    }
 }
