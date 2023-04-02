@@ -18,32 +18,34 @@ public class Animal {
      * @throws
      */
     public Animal(int AnimalId, String animalNickname, String animalSpecies) throws IllegalArgumentException{
-
+    	this.ANIMALID = AnimalId;
+    	this.animalNickname = animalNickname;
+    	this.animalSpecies = animalSpecies;
     }
 
     /** Getters */
 
     /**
-     * getter method that returns the animal 
+     * getter method that returns the animal ID 
      * @return
      */
-    public int getAnimal(){
-
+    public int getANIMALID(){
+    	return ANIMALID;	
     }
 
     /**
-     * 
+     * getter method that returns the animal nickname
      * @return
      */
     public String getAnimalNickname(){
-
+    	return animalNickname;
     }
     /**
-     * 
+     * getter method that returns the animal species
      * @return
      */
     public String getAnimalSpecies(){
-
+    	return animalSpecies;
     }
 
     /** Setters */
@@ -53,13 +55,13 @@ public class Animal {
      * @param nickname
      */
     public void setAnimalNickname(String nickname){
-
+    	this.animalNickname = nickname;
     }
     /**
      * 
      * @param species
      */
     public void setAnimalSpecies(String species){
-
+    	this.animalSpecies = species;
     }
 }
