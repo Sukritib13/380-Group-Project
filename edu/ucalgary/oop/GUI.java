@@ -64,9 +64,9 @@ public class GUI extends JFrame implements ActionListener {
     public static void main(String[] args) {
         try {
             Database db = new Database();
-            ArrayList<Animal> animals = db.readAnimalsFromDatabase();
-            ArrayList<Task> tasks = db.readTasksFromDatabase();
-            ArrayList<Treatment> treatments = db.readTreatmentsFromDatabase();
+            ArrayList<Animal> animals = db.getAnimalsArrayL();
+            ArrayList<Task> tasks = db.getTasksArrayL();
+            ArrayList<Treatment> treatments = db.getTreatmentsArrayL();
             ExampleWildlifeRescue rescue = new ExampleWildlifeRescue(animals, tasks, treatments);
             GUI gui = new GUI(rescue);
         } catch (SQLException e) {
