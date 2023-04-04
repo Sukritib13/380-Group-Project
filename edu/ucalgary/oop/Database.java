@@ -40,9 +40,9 @@ public class Database {
             Statement stmt = dbConnection.createStatement();
             String query = "SELECT AnimalID, AnimalNickName, AnimalSpecies FROM animals";
             ResultSet results = stmt.executeQuery(query);
-            
-            String id = results.getString("AnimalID");
+           
             while (results.next()) {
+                String id = results.getString("AnimalID");
                 String nickname = results.getString("AnimalNickName");
                 String species = results.getString("AnimalSpecies");
                 
@@ -110,14 +110,17 @@ public class Database {
     }
 
     public ArrayList<Animal> getAnimalsArrayL(){
+        readAnimalsFromDatabase();
         return this.animals;
     }
 
     public ArrayList<Task> getTasksArrayL(){
+        readTasksFromDatabase();
         return this.tasks;
     }
 
     public ArrayList<Treatment> getTreatmentsArrayL(){
+        readTreatmentsFromDatabase();
         return this.treatments;
     }
 
