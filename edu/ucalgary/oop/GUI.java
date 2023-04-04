@@ -14,7 +14,6 @@ import java.util.*;
 import java.sql.*;
 import java.text.*;
 import java.io.*;
-import java.util.Date;
 
 public class GUI extends JFrame implements ActionListener {
     private ExampleWildlifeRescue rescue;
@@ -43,19 +42,25 @@ public class GUI extends JFrame implements ActionListener {
     
     public void actionPerformed(ActionEvent e) {
         try {
-
-            Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.YEAR, 2023);
-            cal.set(Calendar.MONTH, 3);
-            cal.set(Calendar.DAY_OF_MONTH, 1);
-            cal.set(Calendar.HOUR_OF_DAY, 8);
-            cal.set(Calendar.MINUTE, 0);
-            Date date = cal.getTime();
-
-            rescue.generateSchedule(date);
-            JOptionPane.showMessageDialog(this, "Schedule generated successfully!");
-        } catch (ParseException ex) {
-            JOptionPane.showMessageDialog(this, "Invalid date format. Please use YYYY-MM-DD.");
+            rescue.generateSchedule();
+            if (rescue.backupsNeededAtHours.size() != 0) {
+                StringBuilder hoursStringBuilder = new StringBuilder();
+                for (String hour : rescue.backupsNeededAtHours) {
+                    if (hoursStringBuilder.length() > 0) {
+                        hoursStringBuilder.append(", ");
+                    }
+                    hoursStringBuilder.append(hour);
+                }
+                String hoursString = hoursStringBuilder.toString();
+                int choice = JOptionPane.showConfirmDialog(this, "Backup volunteer needed at the following hours: " + hoursString + ".\nIs this okay?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    JOptionPane.showMessageDialog(this, "Schedule generated successfully!");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Schedule could not be generated. Please alter treatment times.");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Schedule generated successfully!");
+            }
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Error writing to file. Please check file permissions.");
         }
@@ -69,7 +74,7 @@ public class GUI extends JFrame implements ActionListener {
             ArrayList<Treatment> treatments = db.getTreatmentsArrayL();
             ExampleWildlifeRescue rescue = new ExampleWildlifeRescue(animals, tasks, treatments);
             GUI gui = new GUI(rescue);
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
