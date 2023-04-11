@@ -2,7 +2,7 @@
 * This class represents a Porcupine and extends the Animal class. It defines the feeding hours, preparation time,
 * feeding duration and cleaning duration for a Porcupine.
 * @author Sukriti Badhwar, Rita Boury, Rimal Rizvi, Huiying Zhen Zhen
-* @version 1.1
+* @version 1.35
 * @since 1.0
 */
 
