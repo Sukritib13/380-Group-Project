@@ -96,20 +96,33 @@ public class EwrTest {
 
     //test constructor and getters for Beaver subclass with valid data
     @Test 
+       @Test 
     public void testBeaverValid(){
         String expectedAnimalId = "2";
         String expectedNickname = "Beaver1";
         String expectedSpecies = "beaver";
+        int[] expectedFeedingHours = {8, 9, 10};
+        int expectedPrepTime = 0;
+        int expectedDurationPerAnimal = 5;
+        int expectedCleaningDuration = 5;
 
         Beaver beaver1 = new Beaver(expectedAnimalId, expectedNickname);
 
         String actualId = beaver1.getId();
         String actualNickname = beaver1.getNickname();
         String actualSpecies = beaver1.getSpecies();
+        int[] actualFeedingHours = beaver1.getFeedingHours();
+        int actualPrepTime = beaver1.getPrepTime();
+        int actualDurationPerAnimal = beaver1.getFeedingDuration();
+        int actualCleaningDuration = beaver1.getCleaningDuration();
 
         assertTrue(expectedAnimalId.equals(actualId));
         assertTrue(expectedNickname.equals(actualNickname));
         assertTrue(expectedSpecies.equals(actualSpecies));
+        assertTrue(Arrays.equals(expectedFeedingHours, actualFeedingHours));
+        assertTrue(expectedPrepTime == actualPrepTime);
+        assertTrue(expectedDurationPerAnimal == actualDurationPerAnimal);
+        assertTrue(expectedCleaningDuration == actualCleaningDuration);
     }
 
     //test constructor and getters for Coyote subclass with valid data
@@ -118,16 +131,28 @@ public class EwrTest {
         String expectedAnimalId = "1";
         String expectedNickname = "Loner";
         String expectedSpecies = "coyote";
+        int[] expectedFeedingHours ={19, 20, 21};
+        int expectedPrepTime = 0;
+        int expectedDurationPerAnimal = 5;
+        int expectedCleaningDuration = 5;
 
         Coyote coyote1 = new Coyote(expectedAnimalId, expectedNickname);
 
         String actualId = coyote1.getId();
         String actualNickname = coyote1.getNickname();
         String actualSpecies = coyote1.getSpecies();
+        int[] actualFeedingHours = coyote1.getFeedingHours();
+        int actualPrepTime = coyote1.getPrepTime();
+        int actualDurationPerAnimal = coyote1.getFeedingDuration();
+        int actualCleaningDuration = coyote1.getCleaningDuration();
 
         assertTrue(expectedAnimalId.equals(actualId));
         assertTrue(expectedNickname.equals(actualNickname));
         assertTrue(expectedSpecies.equals(actualSpecies));
+        assertTrue(Arrays.equals(expectedFeedingHours, actualFeedingHours));
+        assertTrue(expectedPrepTime == actualPrepTime);
+        assertTrue(expectedDurationPerAnimal == actualDurationPerAnimal);
+        assertTrue(expectedCleaningDuration == actualCleaningDuration);
     }
 
     //test constructor and getters for Fox subclass with valid data
@@ -136,16 +161,28 @@ public class EwrTest {
         String expectedAnimalId = "7";
         String expectedNickname = "Slinky";
         String expectedSpecies = "fox";
+        int[] expectedFeedingHours = {0, 1, 2};
+        int expectedPrepTime = 5;
+        int expectedDurationPerAnimal = 5;
+        int expectedCleaningDuration = 5;
 
         Fox fox1 = new Fox(expectedAnimalId, expectedNickname);
 
         String actualId = fox1.getId();
         String actualNickname = fox1.getNickname();
         String actualSpecies = fox1.getSpecies();
+        int[] actualFeedingHours = fox1.getFeedingHours();
+        int actualPrepTime = fox1.getPrepTime();
+        int actualDurationPerAnimal = fox1.getFeedingDuration();
+        int actualCleaningDuration = fox1.getCleaningDuration();
 
         assertTrue(expectedAnimalId.equals(actualId));
         assertTrue(expectedNickname.equals(actualNickname));
         assertTrue(expectedSpecies.equals(actualSpecies));
+        assertTrue(Arrays.equals(expectedFeedingHours, actualFeedingHours));
+        assertTrue(expectedPrepTime == actualPrepTime);
+        assertTrue(expectedDurationPerAnimal == actualDurationPerAnimal);
+        assertTrue(expectedCleaningDuration == actualCleaningDuration);
     }
 
     //test constructor and getters for Porcupine subclass with valid data
@@ -154,16 +191,28 @@ public class EwrTest {
         String expectedAnimalId = "8";
         String expectedNickname = "Spike";
         String expectedSpecies = "porcupine";
+        int[] expectedFeedingHours = {19, 20, 21};
+        int expectedPrepTime = 0;
+        int expectedDurationPerAnimal = 5;
+        int expectedCleaningDuration = 10;
 
         Porcupine porcupine1 = new Porcupine(expectedAnimalId, expectedNickname);
 
         String actualId = porcupine1.getId();
         String actualNickname = porcupine1.getNickname();
         String actualSpecies = porcupine1.getSpecies();
+        int[] actualFeedingHours = porcupine1.getFeedingHours();
+        int actualPrepTime = porcupine1.getPrepTime();
+        int actualDurationPerAnimal = porcupine1.getFeedingDuration();
+        int actualCleaningDuration = porcupine1.getCleaningDuration();
 
         assertTrue(expectedAnimalId.equals(actualId));
         assertTrue(expectedNickname.equals(actualNickname));
         assertTrue(expectedSpecies.equals(actualSpecies));
+        assertTrue(Arrays.equals(expectedFeedingHours, actualFeedingHours));
+        assertTrue(expectedPrepTime == actualPrepTime);
+        assertTrue(expectedDurationPerAnimal == actualDurationPerAnimal);
+        assertTrue(expectedCleaningDuration == actualCleaningDuration);
     }
 
     //test constructor and getters for Raccoon subclass with valid data
@@ -172,16 +221,28 @@ public class EwrTest {
         String expectedAnimalId = "9";
         String expectedNickname = "Ricky";
         String expectedSpecies = "raccoon";
+        int[] expectedFeedingHours = {0, 1, 2};
+        int expectedPrepTime = 0;
+        int expectedDurationPerAnimal = 5;
+        int expectedCleaningDuration = 5;
 
         Raccoon raccoon1 = new Raccoon(expectedAnimalId, expectedNickname);
 
         String actualId = raccoon1.getId();
         String actualNickname = raccoon1.getNickname();
         String actualSpecies = raccoon1.getSpecies();
+        int[] actualFeedingHours = raccoon1.getFeedingHours();
+        int actualPrepTime = raccoon1.getPrepTime();
+        int actualDurationPerAnimal = raccoon1.getFeedingDuration();
+        int actualCleaningDuration = raccoon1.getCleaningDuration();
 
         assertTrue(expectedAnimalId.equals(actualId));
         assertTrue(expectedNickname.equals(actualNickname));
         assertTrue(expectedSpecies.equals(actualSpecies));
+        assertTrue(Arrays.equals(expectedFeedingHours, actualFeedingHours));
+        assertTrue(expectedPrepTime == actualPrepTime);
+        assertTrue(expectedDurationPerAnimal == actualDurationPerAnimal);
+        assertTrue(expectedCleaningDuration == actualCleaningDuration);
     }
 
     /** The following section is for testing methods in the Example Wildlife Rescue class. */
