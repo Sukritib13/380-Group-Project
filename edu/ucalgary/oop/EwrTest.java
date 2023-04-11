@@ -1,249 +1,362 @@
+/**
+ * EwrTest.java, this class provides test cases for the EWR application to ensure that it is working as expected.
+ * For every test case, there are two tests, one for valid data and one for invalid data.
+ * @author Sukriti Badhwar, Rita Boury, Rimal Rizvi, Huiying Zhen Zhen
+ * @version 1.4
+ * @since 1.0
+ */
 package edu.ucalgary.oop;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import org.junit.Test;
+import java.util.*;
 
 public class EwrTest {
-	int expectedAnimalId = 3;
-	String expectedAnimalNickname = "Bitter";
-	String expectedAnimalSpecies = "coyote";
-	int expectedTreatmentHour = 13;
-	int expectedTaskId = 7;
-	String expectedDescription = "Give vitamin injection";
-	int expectedDuration = 5;
-	int expectedMaxWindow = 5;
+    String expectedTaskId = "1";
+    String expectedDescription = "Kit feeding";
+    int expectedDuration = 30;
+    int expectedMaxWindow = 2;
+    String expectedStartHour = "22";
+    String expectedAnimalId = "1";
+    String expectedTreatmentId = "2";
+    String expectedId = "1";
 
-	public Animal testAnimal = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies );
+    /** The following section is for testing the methods in the Task class. */
 
-	@Test
-	public void testAnimalConstructor {
-		int expectedAnimalId = 5;
-		String expectedAnimalNickname = "Eraser";
-		String expectedAnimalSpecies = "coyote";
-
-		Animal testObject = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-
-		int actualAnimalId = testObject.getAnimalId();
-		String actualAnimalNickname = testObject.getAnimalNickname();
-		String actualAnimalSpecies = testObject.getAnimalSpecies();
-
-		assertEquals("Constructor or getter gave wrong value for AnimalId", expectedAnimalId, actualAnimalId);
-		assertEquals("Constructor or getter gave wrong value for AnimalNickname", expectedAnimalNickname, actualAnimalNickname);
-		assertEquals("Constructor or getter gave wrong value for AnimalSpecies", expectedAnimalSpecies, actualAnimalSpecies);
-	}
-
-
-	@Test
-	public void testGetAnimalId {
-		String actualAnimalId = testAnimal.getAnimalId();
-		assertEquals("IncorrectInformation returned for AnimalId", expectedAnimalId, actualAnimalId);
-	}
-
-	@Test
-	public void testGetAnimalNickname {
-		String actualAnimalNickname = testAnimal.getAnimalNickname();
-		assertEquals("IncorrectInformation returned for AnimalNickname", expectedAnimalNickname, actualAnimalNickname);
-	}
-
-	@Test
-	public void testGetAnimalSpecies {
-		String actualAnimalSpecies = testAnimal.getAnimalSpecies();
-		assertEquals("IncorrectInformation returned for AnimalSpecies", expectedAnimalSpecies, actualAnimalSpecies);
-	}
-
-	@Test
-	public void setAnimalNicknameTest {
-		var testAnimal2 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		String newExpectedNickname = "Lola";
-		testAnimal2.setAnimalNickname(newExpectedNickName);
-		String actualNickName = testAnimal2.getAnimalNickname();
-		assertEquals("Error with setting Animal Nickname", newExpectedNickname, actualNickname);
-	}
-
-	@Test
-	public void setAnimalSpecies {
-		var testAnimal2 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		String newExpectedSpecies = "Beaver";
-		testAnimal2.setAnimalNickname(newExpectedSpecies);
-		String actualSpecies = testAnimal2.getAnimalSpecies();
-		assertEquals("Error with setting Animal Species", newExpectedSpecies, actualSpecies);
-	}
-
-	@Test
-	public void testAnimalIdException() {
-		 boolean testResult = false;
-		int invalidAnimalId = 153;
-		try {
-		    var testAnimal3 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);     
-		}
-		catch (IllegalArgumentException e) {
-		    testResult = true;
-		}
-		catch (Exception e) { }
-		assertTrue("Invalid Animal Id did not throw an IllegalArgumentException", testResult);
-	}
-
-	@Test
-	public void testTreatmentInheritedGetters(){
-		int actualAnimalId = testAnimal.getAnimalId();
-		int actualTaskId = testAnimal.getTaskId();
-		int actualDescription = testAnimal.getDescription();
-		int actualDuration = testAnimal.getDuration();
-		int actualMaxWindow = testAnimal.getMaxWindow();
-
-		assertEquals("Getter returned wrong value for AnimalId", expectedAnimalId, actualAnimalId);
-		assertEquals("Getter returned wrong value for TaskId", expectedTaskId, actualTaskId);
-		assertEquals("Getter returned wrong value for Description", expectedDescription, actualDescription);
-		assertEquals("Getter returned wrong value for Duration", expectedDuration, actualDuration);
-		assertEquals("Getter returned wrong value for MaxWindow", expectedMaxWindow, actualMaxWindow);
-	}
-
-	@Test
-	public void testTreatmentHourGetter(){
-		int actualTreatmentHour = testAnimal.getStartHour();
-		assertEquals("Getter returned wrong value for StartHour", expectedTreatmentHour, actualTreatmentHour);
-	}
-
-	@Test
-	public void testInvalidStartHour(){
-		boolean testResult = false;
-		int invalidStartHour = 26;
-
-		try {
-		    var testTreatment = new Treatment(expectedAnimalId, expectedTaskId, expectedDescription, expectedDuration, expectedMaxWindow, invalidStartHour);     
-		}
-		catch (IllegalArgumentException e) {
-		    testResult = true;
-		}
-		catch (Exception e) { }
-		assertTrue("Invalid start hour did not throw an IllegalArgumentException", testResult);
-	}
-	
-	
-	// ExampleWildlifeRescue Class Tests
-
-	ArrayList<Animal> testAnimals = new ArrayList <Animal>();
-	ArrayList<Tasks> testTasks = new ArrayList <Tasks>();
-
-	public ExampleWildlifeRescue ewr = new ExampleWildlifeRescue(testAnimals, testTasks);
-
-	@Test
-	public void testAddAnimal() {
-		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		ewr.addAnimal(animal);
-		assertEquals("Animal not added to ArrayList properly", 1, ewr.getAnimals().size());
-	}
-
-	@Test
-	public void testAddingDuplicateAnimals() {
-		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		ewr.addAnimal(animal1);
-		Animal animal2 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		ewr.addAnimal(animal2);
-		assertEquals("Cannot add animals with the same ID.", 1, ewr.getAnimals().size());
-	}
-
-	@Test
-	public void testRemoveAnimal() {
-		Animal animal1 = new Animal(expectedAnimalId, expectedAnimalNickname, expectedAnimalSpecies);
-		Animal animal2 = new Animal(5, "Eraser", "coyote");
-		ewr.addAnimal(animal1);
-		ewr.addAnimal(animal2);
-		ewr.removeAnimal(animal1);
-		assertFalse("removeAnimal did not remove the animal properly", ewr.getAnimals().contains(animal1));
-	}
-
-	@Test
-	public void testAddTask() {
-		Task testTask = new Task(1, 'Kit feeding', 30, 2);
-		ewr.addTask(testTask);
-		assertEquals(1, ewr.getTasks().size());
-	}
-
-	@Test
-	public void testRemoveTask() {
-		Task testTask = new Task(1, 'Kit feeding', 30, 2);
-		ewr.addTask(testTask);
-		ewr.removeTask(testTask);
-		assertFalse(ewr.getTasks().contains(testTask));
-	}
-
-	@Test
-	public void testExampleWildlifeRescueConstructorAndGetters() {
-		ArrayList<Animal> expectedAnimals = testAnimals;
-		ArrayList<Tasks> expectedTasks = testTasks;
-
-		public ExampleWildlifeRescue ewr1 = new ExampleWildlifeRescue(testAnimals, testTasks);
-
-		ArrayList<Animal> actualAnimals = ewr1.getAnimals();
-		ArrayList<Tasks> actualTasks = ewr1.getTasks();
-
-		assertEquals("Constructor or getter gave wrong value for animals", expectedAnimals, actualAnimals);
-		assertEquals("Constructor or getter gave wrong value for tasks", expectedTasks, actualTasks);
-	}
-
-	@Test
-	public void testExampleWildlifeRescueIllegalArgumentException() {
-		boolean testResult = false;
-		try {
-		    public ExampleWildlifeRescue ewr = new ExampleWildlifeRescue(testTasks, testAnimals); // switched argument order
-		}
-		catch (IllegalArgumentException e) {
-		    testResult = true;
-		}
-		catch (Exception e) { }
-		assertTrue("ExampleWildlifeRescue constructor did not throw an IllegalArgumentException with invalid argument order.", 
-		    testResult);
-	}
-
-	@Test
-	public void testFormatSchedule() {
-		Animal animal1 = new Animal(6, 'Annie, Oliver and Mowgli', 'fox');
-		Animal animal2 = new Animal(8, 'Spike', 'porcupine');
-		Task task1 = new Task(1, 'Kit feeding', 30, 2, animal1);
-		Task task2 = new Task(2, 'Rebandage leg wound', 20, 1, animal2);
-		ewr.addAnimal(animal1);
-		ewr.addAnimal(animal2);
-		ewr.addTask(task1);
-		ewr.addTask(task2);
-
-		String expectedSchedule = "Schedule for 2023-02-27\n\n19:00\n* Rebandage leg wound (Slinky)\n* Kit feeding (Annie, Oliver and Mowgli)\n\n21:00\n* Kit feeding (Annie, Oliver and Mowgli)"
-
-		String actualSchedule = ewr.formatSchedule("2023-02-27");
-
-		assertEquals("formatSchedule did not format correctly.", expectedSchedule, actualSchedule); 
-	}
-	
-	@Test
-    	public void testFeedingInheritedGetters(){
-        int actualAnimalId = testAnimal.getAnimalId();
-        int actualTaskId = testAnimal.getTaskId();
-        int actualDescription = testAnimal.getDescription();
-        int actualDuration = testAnimal.getDuration();
-        int actualMaxWindow = testAnimal.getMaxWindow();
-
-        assertEquals("Getter returned wrong value for AnimalId", expectedAnimalId, actualAnimalId);
-        assertEquals("Getter returned wrong value for TaskId", expectedTaskId, actualTaskId);
-        assertEquals("Getter returned wrong value for Description", expectedDescription, actualDescription);
-        assertEquals("Getter returned wrong value for Duration", expectedDuration, actualDuration);
-        assertEquals("Getter returned wrong value for MaxWindow", expectedMaxWindow, actualMaxWindow);
-    }
-
+    //test the constructor and getters with valid data
     @Test
-    public void testFeedingHourGetter(){
-        int actualFeedingHour = testAnimal.getFeedingHour();
-        assertEquals("Getter returned wrong value for FeedingHour", expectedFeedingHour, actualFeedingHour);
-    }
+    public void testTaskConstructorAndGetters(){
+        Task task1 = new Task(expectedTaskId, expectedDescription, expectedDuration, expectedMaxWindow);
 
+        String actualId = task1.getId();
+        String actualDescription = task1.getDescription();
+        int actualDuration = task1.getDuration();
+        int actualMaxWindow = task1.getMaxWindow();
+
+        assertTrue(expectedId.equals(actualId));
+        assertTrue(expectedDescription.equals(actualDescription));
+        assertTrue(expectedDuration == actualDuration);
+        assertTrue(expectedMaxWindow == actualMaxWindow);
+    }
+    
+    //test the constructor with invalid data
     @Test
-    public void testInvalidFeedingHour(){
+    public void testTaskConstructorInvalid(){
         boolean testResult = false;
-        int invalidFeedingHour = 26;
-
-        try {
-            var testFeeding = new Feeding(expectedAnimalId, expectedTaskId, expectedDescription, expectedDuration, expectedMaxWindow, invalidFeedingHour);
+        String invalidTaskId = "abc";
+        
+        //try/catch block to check if the exception is thrown
+        try{
+            var testTask = new Task(invalidTaskId, expectedDescription, expectedDuration, expectedMaxWindow);
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException e){
             testResult = true;
         }
+        catch(Exception e){ }
+        assertTrue("Invalid ID should throw an IllegalArgumentException", testResult);
+    }
+
+    /** The following section is for testing methods in the Treatment class. */
+
+    //test the constructor and getters with valid data
+    @Test
+    public void testTreatmentConstructorAndGetters(){
+        Treatment treatment1 = new Treatment(expectedTreatmentId, expectedAnimalId, expectedTaskId, expectedStartHour);
+
+        String actualTreatmentId = treatment1.getId();
+        String actualAnimalId = treatment1.getAnimalId();
+        String actualTaskId = treatment1.getTaskId();
+        String actualStartHour = treatment1.getStartHour();
+
+        assertTrue(expectedTreatmentId.equals(actualTreatmentId));
+        assertTrue(expectedAnimalId.equals(actualAnimalId));
+        assertTrue(expectedTaskId.equals(actualTaskId));
+        assertTrue(expectedStartHour.equals(actualStartHour));
+    }
+
+    //test the constructor with invalid data
+    @Test
+    public void testTreatmentConstructorInvalid(){
+        boolean testResult = false;
+        String invalidStartHour = "30";
+
+        //try/catch block to check if the exception is thrown
+        try{
+            var testTreatment = new Treatment(expectedTreatmentId, expectedAnimalId, expectedTaskId, invalidStartHour);
+        }
+        catch (IllegalArgumentException e){
+            testResult = true;
+        }
+        catch(Exception e){ }
+        assertTrue("Invalid start hour should throw an IllegalArgumentException", testResult);
+    }
+
+    /** The following section is for testing constructors and getters for each animal subclass. */
+
+    //test constructor and getters for Beaver subclass with valid data
+    @Test 
+    public void testBeaverValid(){
+        String expectedAnimalId = "2";
+        String expectedNickname = "Beaver1";
+        String expectedSpecies = "beaver";
+
+        Beaver beaver1 = new Beaver(expectedAnimalId, expectedNickname);
+
+        String actualId = beaver1.getId();
+        String actualNickname = beaver1.getNickname();
+        String actualSpecies = beaver1.getSpecies();
+
+        assertTrue(expectedAnimalId.equals(actualId));
+        assertTrue(expectedNickname.equals(actualNickname));
+        assertTrue(expectedSpecies.equals(actualSpecies));
+    }
+
+    //test constructor and getters for Coyote subclass with valid data
+    @Test
+    public void testCoyoteValid(){
+        String expectedAnimalId = "1";
+        String expectedNickname = "Loner";
+        String expectedSpecies = "coyote";
+
+        Coyote coyote1 = new Coyote(expectedAnimalId, expectedNickname);
+
+        String actualId = coyote1.getId();
+        String actualNickname = coyote1.getNickname();
+        String actualSpecies = coyote1.getSpecies();
+
+        assertTrue(expectedAnimalId.equals(actualId));
+        assertTrue(expectedNickname.equals(actualNickname));
+        assertTrue(expectedSpecies.equals(actualSpecies));
+    }
+
+    //test constructor and getters for Fox subclass with valid data
+    @Test
+    public void testFoxValid(){
+        String expectedAnimalId = "7";
+        String expectedNickname = "Slinky";
+        String expectedSpecies = "fox";
+
+        Fox fox1 = new Fox(expectedAnimalId, expectedNickname);
+
+        String actualId = fox1.getId();
+        String actualNickname = fox1.getNickname();
+        String actualSpecies = fox1.getSpecies();
+
+        assertTrue(expectedAnimalId.equals(actualId));
+        assertTrue(expectedNickname.equals(actualNickname));
+        assertTrue(expectedSpecies.equals(actualSpecies));
+    }
+
+    //test constructor and getters for Porcupine subclass with valid data
+    @Test
+    public void testPorcupineValid(){
+        String expectedAnimalId = "8";
+        String expectedNickname = "Spike";
+        String expectedSpecies = "porcupine";
+
+        Porcupine porcupine1 = new Porcupine(expectedAnimalId, expectedNickname);
+
+        String actualId = porcupine1.getId();
+        String actualNickname = porcupine1.getNickname();
+        String actualSpecies = porcupine1.getSpecies();
+
+        assertTrue(expectedAnimalId.equals(actualId));
+        assertTrue(expectedNickname.equals(actualNickname));
+        assertTrue(expectedSpecies.equals(actualSpecies));
+    }
+
+    //test constructor and getters for Raccoon subclass with valid data
+    @Test
+    public void testRaccoonValid(){
+        String expectedAnimalId = "9";
+        String expectedNickname = "Ricky";
+        String expectedSpecies = "raccoon";
+
+        Raccoon raccoon1 = new Raccoon(expectedAnimalId, expectedNickname);
+
+        String actualId = raccoon1.getId();
+        String actualNickname = raccoon1.getNickname();
+        String actualSpecies = raccoon1.getSpecies();
+
+        assertTrue(expectedAnimalId.equals(actualId));
+        assertTrue(expectedNickname.equals(actualNickname));
+        assertTrue(expectedSpecies.equals(actualSpecies));
+    }
+
+    /** The following section is for testing methods in the Example Wildlife Rescue class. */
+
+    //test the constructor and getters with valid data
+    @Test
+    public void testExampleWildlifeRescueConstructorAndGetters(){
+    	ArrayList<Animal> expectedAnimals = new ArrayList<Animal>();
+    	ArrayList<Task> expectedTasks = new ArrayList<Task>();
+    	ArrayList<Treatment> expectedTreatments = new ArrayList<Treatment>();
+    	
+    	//Add animals
+    	expectedAnimals.add(new Fox("7", "Slinky"));
+    	expectedAnimals.add(new Coyote("1", "Loner"));
+    	expectedAnimals.add(new Porcupine("8", "Spike"));
+    	
+    	//Add tasks
+    	expectedTasks.add(new Task("5", "Flush neck wound", 25, 1));
+    	expectedTasks.add(new Task("6", "Give fluid injection", 10, 1));
+    	
+    	//Add treatments
+    	expectedTreatments.add(new Treatment("1", "1", "5", "12"));
+    	expectedTreatments.add(new Treatment("3", "8", "6", "2"));
+    	
+    	//create an instance of the ExampleWildlifeRescue class
+    	ExampleWildlifeRescue exampleRescue = new ExampleWildlifeRescue(expectedAnimals, expectedTasks, expectedTreatments);
+    	
+		ArrayList<Animal> actualAnimals = exampleRescue.getAnimals();
+        ArrayList<Task> actualTasks = exampleRescue.getTasks();
+        ArrayList<Treatment> actualTreatments = exampleRescue.getTreatments();
+
+        assertTrue(expectedAnimals.equals(actualAnimals));
+        assertTrue(expectedTasks.equals(actualTasks));
+        assertTrue(expectedTreatments.equals(actualTreatments));
+    }
+
+    //test backup calculation method
+    @Test
+    public void testBackupCalculation() {
+        ArrayList<Animal> expectedAnimals = new ArrayList<Animal>();
+        ArrayList<Task> expectedTasks = new ArrayList<Task>();
+        ArrayList<Treatment> expectedTreatments = new ArrayList<Treatment>();
+        
+        //Add animals
+        expectedAnimals.add(new Fox("6", "Slinky"));
+        expectedAnimals.add(new Coyote("1", "Loner"));
+        expectedAnimals.add(new Porcupine("8", "Spike"));
+        
+        //Add tasks
+        expectedTasks.add(new Task("1", "Kit feeding", 30, 2));
+        expectedTasks.add(new Task("5", "Flush neck wound", 65, 1));
+        expectedTasks.add(new Task("6", "Give fluid injection", 10, 1));
+        
+        //Add treatments
+        expectedTreatments.add(new Treatment("2", "6", "2", "12"));
+        expectedTreatments.add(new Treatment("1", "1", "5", "12"));
+        expectedTreatments.add(new Treatment("3", "8", "1", "2"));
+        
+        //create an instance of the ExampleWildlifeRescue class
+        ExampleWildlifeRescue exampleRescue = new ExampleWildlifeRescue(expectedAnimals, expectedTasks, expectedTreatments);
+
+        //Create tasks
+        ArrayList<Task> tasks = new ArrayList<>();
+        tasks.add(new Task("6", "Give fluid injection", 10, 1));
+        tasks.add(new Task("5", "Flush neck wound", 25, 1));
+
+        //Create tasks by hour map
+        HashMap<Integer, ArrayList<Task>> tasksByTheHour = new HashMap<>();
+        tasksByTheHour.put(8, new ArrayList<>(tasks));
+        tasksByTheHour.put(9, new ArrayList<>(expectedTasks));
+
+        exampleRescue.setTasksByTheHour(tasksByTheHour);
+
+        exampleRescue.backupCalculation();
+
+        ArrayList<Integer> backupsNeededAtHours = exampleRescue.getBackupsNeededAtHours();
+        assertEquals(1, backupsNeededAtHours.size());
+        assertEquals((Integer) 12, backupsNeededAtHours.get(0));
+
+        ArrayList<Integer> durationPerHour = exampleRescue.getDurationPerHour();
+        assertEquals(0, durationPerHour.get(8).intValue());
+        assertEquals(0, durationPerHour.get(9).intValue());
+    }
+
+    //test backup calculation method with no tasks
+    @Test
+    public void testBackupCalculationNoTasks() {
+    	ArrayList<Animal> expectedAnimals = new ArrayList<Animal>();
+    	ArrayList<Task> expectedTasks = new ArrayList<Task>();
+    	ArrayList<Treatment> expectedTreatments = new ArrayList<Treatment>();
+    	
+    	//Add animals
+    	expectedAnimals.add(new Fox("7", "Slinky"));
+    	expectedAnimals.add(new Coyote("1", "Loner"));
+    	expectedAnimals.add(new Porcupine("8", "Spike"));
+    	
+    	//Add tasks
+        expectedTasks.add(new Task("1", "Kit feeding", 30, 2));
+    	expectedTasks.add(new Task("5", "Flush neck wound", 25, 1));
+    	expectedTasks.add(new Task("6", "Give fluid injection", 10, 1));
+    	
+    	//Add treatments
+    	expectedTreatments.add(new Treatment("1", "1", "5", "12"));
+    	expectedTreatments.add(new Treatment("3", "8", "6", "2"));
+        expectedTreatments.add(new Treatment("3", "8", "1", "2"));
+    	
+    	//create an instance of the ExampleWildlifeRescue class
+    	ExampleWildlifeRescue exampleRescue = new ExampleWildlifeRescue(expectedAnimals, expectedTasks, expectedTreatments);
+        exampleRescue.backupCalculation();
+
+        ArrayList<Integer> backupsNeededAtHours = exampleRescue.getBackupsNeededAtHours();
+        assertEquals(0, backupsNeededAtHours.size());
+
+        ArrayList<Integer> durationPerHour = exampleRescue.getDurationPerHour();
+        assertEquals(0, durationPerHour.get(8).intValue());
+        assertEquals(0, durationPerHour.get(9).intValue());
+    }
+
+    //test addTreatments method
+    @Test
+    public void testAddTreatments(){
+        ArrayList<Animal> expectedAnimals = new ArrayList<Animal>();
+        ArrayList<Task> expectedTasks = new ArrayList<Task>();
+        ArrayList<Treatment> expectedTreatments = new ArrayList<Treatment>();
+        
+        //Add animals
+        expectedAnimals.add(new Fox("7", "Slinky"));
+        expectedAnimals.add(new Coyote("1", "Loner"));
+        expectedAnimals.add(new Porcupine("8", "Spike"));
+        
+        //Add tasks
+        expectedTasks.add(new Task("5", "Flush neck wound", 25, 1));
+        expectedTasks.add(new Task("6", "Give fluid injection", 10, 1));
+        
+        //Add treatments
+        expectedTreatments.add(new Treatment("1", "1", "5", "12"));
+        //expectedTreatments.add(new Treatment("3", "8", "6", "2"));
+        
+        //create an instance of the ExampleWildlifeRescue class
+        ExampleWildlifeRescue exampleRescue = new ExampleWildlifeRescue(expectedAnimals, expectedTasks, expectedTreatments);
+        exampleRescue.addTreatments();
+
+        String expectedSchedLine = "* Flush neck wound (Loner).";
+        assertEquals(exampleRescue.getScheduleByTheHour().get(12).get(0), expectedSchedLine);
+        ArrayList<Treatment> actualTreatments = exampleRescue.getTreatments();
+        assertEquals(expectedTreatments, actualTreatments);
+    }
+
+    //test addFeeding method
+    @Test
+    public void testAddFeeding(){
+        ArrayList<Animal> expectedAnimals = new ArrayList<Animal>();
+        ArrayList<Task> expectedTasks = new ArrayList<Task>();
+        ArrayList<Treatment> expectedTreatments = new ArrayList<Treatment>();
+        
+        //Add animals
+        expectedAnimals.add(new Fox("6", "Slinky"));
+        expectedAnimals.add(new Coyote("1", "Loner"));
+        expectedAnimals.add(new Porcupine("8", "Spike"));
+        
+        //Add tasks
+        expectedTasks.add(new Task("1", "Kit feeding", 30, 2));
+        expectedTasks.add(new Task("5", "Flush neck wound", 25, 1));
+        expectedTasks.add(new Task("6", "Give fluid injection", 10, 1));
+        
+        //Add treatments
+        expectedTreatments.add(new Treatment("2", "6", "2", "0"));
+        expectedTreatments.add(new Treatment("1", "1", "5", "12"));
+        expectedTreatments.add(new Treatment("3", "8", "1", "2"));
+        
+        //create an instance of the ExampleWildlifeRescue class
+        ExampleWildlifeRescue exampleRescue = new ExampleWildlifeRescue(expectedAnimals, expectedTasks, expectedTreatments);
+        exampleRescue.addFeeding();
+
+        String expectedSchedLine = "* Feeding - fox (1: Slinky)";
+        assertEquals(expectedSchedLine, exampleRescue.getScheduleByTheHour().get(0).get(0));
+    }
 }
