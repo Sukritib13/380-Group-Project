@@ -42,14 +42,19 @@ public class GUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (backupCalculationAndConfirmation()) {
             generateSchedule();
-        } else {
+        } else if (rescue.getImpossibleHours().size() != 0) {
+            handleImpossible();
+        }
+        else {
             handleScheduleGenerationError();
         }
     }
     
     private boolean backupCalculationAndConfirmation() {
         rescue.backupCalculation();
-        if (rescue.getBackupsNeededAtHours().size() != 0) {
+        if (rescue.getImpossibleHours().size() != 0){
+            return false;
+        } else if (rescue.getBackupsNeededAtHours().size() != 0) {
             StringBuilder hoursStringBuilder = new StringBuilder();
             for (int hour : rescue.getBackupsNeededAtHours()) {
                 if (hoursStringBuilder.length() > 0) {
@@ -75,6 +80,26 @@ public class GUI extends JFrame implements ActionListener {
         
     }
     
+    private void handleImpossible() {
+        try {
+            FileWriter myWriter = new FileWriter("schedule.txt");
+            myWriter.write("Schedule could not be generated.");
+            myWriter.close();
+            StringBuilder hoursStringBuilder = new StringBuilder();
+            for (int hour : rescue.getImpossibleHours()) {
+                if (hoursStringBuilder.length() > 0) {
+                    hoursStringBuilder.append(", ");
+                }
+                hoursStringBuilder.append(hour);
+            }
+            String hoursString = hoursStringBuilder.toString();
+            JOptionPane.showMessageDialog(this, "Schedule could not be generated since too many events were scheduled at the times " + hoursString + " and more than one backup would be necessary to account for them.");
+ 
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Error writing to file. Please check file permissions.");
+        }
+    }
+
     private void handleScheduleGenerationError() {
         try {
             FileWriter myWriter = new FileWriter("schedule.txt");
@@ -145,6 +170,8 @@ public class GUI extends JFrame implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Hour " + selectedHour + " no longer needs backup!");
                     if (backupCalculationAndConfirmation()) {
                         generateSchedule();
+                    } else if (rescue.getImpossibleHours().size() != 0) {
+                        handleImpossible();
                     } else {
                         handleScheduleGenerationError();
                     }
