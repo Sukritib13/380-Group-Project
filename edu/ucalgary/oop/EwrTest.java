@@ -96,7 +96,6 @@ public class EwrTest {
 
     //test constructor and getters for Beaver subclass with valid data
     @Test 
-       @Test 
     public void testBeaverValid(){
         String expectedAnimalId = "2";
         String expectedNickname = "Beaver1";
