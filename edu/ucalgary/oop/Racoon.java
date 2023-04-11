@@ -2,7 +2,7 @@
  * The Raccoon class is a subclass of the Animal class, representing a raccoon at the Wildlife Rescue.
  * It contains methods to retrieve information about feeding and cleaning for the raccoon subclass.
  * @author Sukriti Badhwar, Rita Boury, Rimal Rizvi, Huiying Zhen Zhen
- * @version 1.0
+ * @version 1.35
  * @since 1.0
  */
 
